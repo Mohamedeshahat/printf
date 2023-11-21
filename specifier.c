@@ -4,7 +4,7 @@
  * @s: format string
  * Return: number of bytes
  */
-int (*get_specifier(char *s))(va_list ap, prarms_t *params)
+int (*get_specifier(char *s))(va_list ap, params_t *params)
 {
 	specifier_t specifiers[] = {
 		{"c", print_char},
@@ -14,7 +14,7 @@ int (*get_specifier(char *s))(va_list ap, prarms_t *params)
 		{"%", print_percent},
 		{"b", print_binary},
 		{"o", print_octal},
-		{"u", print_unsign},
+		{"u", print_unsigned},
 		{"x", print_hex},
 		{"X", print_HEX},
 		{"p", print_address},
@@ -25,11 +25,11 @@ int (*get_specifier(char *s))(va_list ap, prarms_t *params)
 	};
 	int i = 0;
 
-	while (specifier[i].specifier)
+	while (specifiers[i].specifier)
 	{
-		if (*s == specifier[i].specifier[0])
+		if (*s == specifiers[i].specifier[0])
 		{
-			return (specifier[i].f);
+			return (specifiers[i].f);
 		}
 		i++;
 	}
@@ -48,7 +48,10 @@ int get_print_func(char *s, va_list ap, params_t *params)
 	int (*f)(va_list, params_t *) = get_specifier(s);
 
 	if (f)
+	{
 		return (f(ap, params));
+	}
+	return (0);
 }
 
 /**
@@ -120,7 +123,7 @@ char *get_width(char *s, params_t *params, va_list ap)
 	}
 	else
 	{
-		while (_isgigit(*s))
+		while (_isdigit(*s))
 			d = d * 10 + (*s++ - '0');
 	}
 	params->width = d;
