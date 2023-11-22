@@ -71,7 +71,7 @@ int print_string(va_list ap, params_t *params)
 	{
 		if (params->precision != UINT_MAX)
 			for (i = 0; i < pad; i++)
-				sun += _putchar(*str++);
+				sum += _putchar(*str++);
 		else
 			sum += _puts(str);
 	}
