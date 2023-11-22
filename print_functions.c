@@ -44,7 +44,7 @@ int print_int(va_list ap, params_t *params)
  */
 int print_string(va_list ap, params_t *params)
 {
-	char *str = va_arg(ap, char*), pad_char = ' ';
+	char *str = va_arg(ap, char *), pad_char = ' ';
 	unsigned int pad = 0, sum = 0, i = 0, j;
 
 	(void)params;
@@ -97,7 +97,7 @@ int print_percent(va_list ap, params_t *params)
  */
 int print_S(va_list ap, params_t *params)
 {
-	char *str = va_arg(ap, char*);
+	char *str = va_arg(ap, char *);
 	char *hex;
 	int sum = 0;
 
@@ -112,6 +112,7 @@ int print_S(va_list ap, params_t *params)
 			hex = convert(*str, 16, 0, params);
 			if (!hex[1])
 				sum += _putchar('0');
+			sum += _puts(hex);
 		}
 		else
 		{
