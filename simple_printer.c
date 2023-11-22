@@ -27,7 +27,7 @@ int print_from_to(char *start, char *stop, char *except)
 int print_rev(va_list ap, params_t *params)
 {
 	int len, sum = 0;
-	char *str = va_arg(ap, char*);
+	char *str = va_arg(ap, char *);
 	(void)params;
 
 	if (str)
@@ -50,8 +50,8 @@ int print_rot13(va_list ap, params_t *params)
 {
 	int i, index;
 	int count = 0;
-	char arr[] = "NOQRSTUVWXYZABCDEFGHILKLM  nopqrstuvwxyzabcdefghijklm";
-	char *a = va_arg(ap, char*);
+	char arr[] = "NOPQRSTUVWXYZABCDEFGHIJLKLM  nopqrstuvwxyzabcdefghijklm";
+	char *a = va_arg(ap, char *);
 	(void)params;
 
 	i = 0;

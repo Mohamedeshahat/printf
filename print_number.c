@@ -33,15 +33,17 @@ int print_number(char *str, params_t *params)
 	int neg = (!params->unsign && *str == '-');
 
 	if (!params->precision && *str == '0' && !str[1])
-		str = " ";
+		str = "";
 	if (neg)
+	{
 		str++;
-	i--;
+		i--;
+	}
 	if (params->precision != UINT_MAX)
 		while (i++ < params->precision)
 			*--str = '0';
 	if (neg)
-		*--str = '0';
+		*--str = '-';
 	if (!params->minus_flag)
 		return (print_number_right_shift(str, params));
 	else
@@ -60,9 +62,9 @@ int print_number_right_shift(char *str, params_t *params)
 	char pad_char = ' ';
 
 	if (params->zero_flag && !params->minus_flag)
-		pad_char = ' ';
+		pad_char = '0';
 	neg = neg2 = (!params->unsign && *str == '-');
-	if (neg && i < params->width && pad_char == '0' && params->minus_flag)
+	if (neg && i < params->width && pad_char == '0' && !params->minus_flag)
 		str++;
 	else
 		neg = 0;
